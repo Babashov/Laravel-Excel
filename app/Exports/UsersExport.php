@@ -4,14 +4,22 @@ namespace App\Exports;
 
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
-
-class UsersExport implements FromCollection
+use Maatwebsite\Excel\Concerns\FromArray;
+class UsersExport implements FromArray
 {
+    protected $dataArr;
+
+    public function __construct($arr)
+    {
+        $this->dataArr = $arr;
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
+    public function array():array
     {
-        return User::all();
+        return $this->dataArr;
+        // return User::all();
     }
 }
